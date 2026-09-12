@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPChecker — Check your ESP Today!</title>
+<meta name="description" content="ESPChecker is a fun prediction game that tests your intuition. Guess where the next square will light up, catch the Red Box, and see how you rank against players worldwide.">
+<link rel="icon" href="./assets/favicon.png">
+<style>
+  :root{
+    --bg:#0A0D12; --panel:#12161F; --edge:#1D2330;
+    --cyan:#4FD6FF; --red:#FF3B30; --text:#E9ECF2; --dim:#7A8494;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: radial-gradient(ellipse at top, #10141C 0%, var(--bg) 60%);
+    color:var(--text);
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:56px 24px 80px; }
+  header{ text-align:center; margin-bottom:48px; }
+  .icon{ width:88px; height:88px; border-radius:20px; margin-bottom:18px; }
+  .eyebrow{ color:var(--cyan); font:700 12px/1 ui-monospace, monospace; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:10px; }
+  h1{ font-size:36px; font-weight:800; margin:0 0 10px; letter-spacing:-0.02em; }
+  .tagline{ color:var(--dim); font-size:17px; margin:0; }
+
+  .cta-row{ display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap; }
+  .btn{ padding:13px 26px; border-radius:10px; font-weight:700; font-size:15px; text-decoration:none; display:inline-block; }
+  .btn-primary{ background:var(--cyan); color:#04121A; }
+  .btn-secondary{ background:transparent; color:var(--text); border:1px solid var(--edge); }
+
+  section{ margin-top:56px; }
+  h2{ font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--cyan); margin-bottom:18px; }
+  p{ line-height:1.6; color:var(--text); }
+
+  .card{ background:var(--panel); border:1px solid var(--edge); border-radius:14px; padding:20px 22px; margin-bottom:14px; }
+  .card h3{ margin:0 0 6px; font-size:16px; }
+  .card p{ margin:0; color:var(--dim); font-size:14.5px; }
+
+  .levels{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+  .level-pill{ background:var(--panel); border:1px solid var(--edge); border-radius:8px; padding:8px 16px; font:700 14px ui-monospace, monospace; color:var(--dim); }
+
+  .swatches{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+  .swatch{ display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--dim); }
+  .dot{ width:12px; height:12px; border-radius:3px; }
+
+  footer{ margin-top:64px; text-align:center; color:var(--dim); font-size:13px; }
+  footer a{ color:var(--cyan); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="icon" src="./assets/icon.png" alt="ESPChecker icon">
+    <div class="eyebrow">Prediction Trial</div>
+    <h1>Can you get a Red Box?</h1>
+    <p class="tagline">Check your ESP Today!</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="signup.html">Join the Beta</a>
+      <a class="btn btn-secondary" href="privacy.html">Privacy Policy</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>What is ESPChecker?</h2>
+    <p>
+      ESPChecker is a simple, addictive prediction game. A square lights up on the grid —
+      you tap where you think the <em>next</em> one will land. Guess right and the box turns
+      red. Keep guessing right on the very first try, over and over, and you're building a
+      real streak.
+    </p>
+  </section>
+
+  <section>
+    <h2>How to play</h2>
+    <div class="card">
+      <h3>1. Pick your grid</h3>
+      <p>Choose how many squares you're up against — from a coin-flip 2-square board to a brutal 64-square grid.</p>
+    </div>
+    <div class="card">
+      <h3>2. Guess the next square</h3>
+      <p>One square is lit. Tap where you think the next one will land before it happens.</p>
+    </div>
+    <div class="card">
+      <h3>3. Catch the Red Box</h3>
+      <p>An exact match turns red and ends the round. Everything else — misses, near-misses — just keeps the round going.</p>
+    </div>
+    <div class="card">
+      <h3>4. Track your number</h3>
+      <p>Every game logs your average tries-to-hit and your best first-try streak, tied to a handle you choose — not your real identity.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Grid levels</h2>
+    <div class="levels">
+      <span class="level-pill">2</span>
+      <span class="level-pill">4</span>
+      <span class="level-pill">8</span>
+      <span class="level-pill">16</span>
+      <span class="level-pill">32</span>
+      <span class="level-pill">64</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nearness coloring</h2>
+    <p>Every guess is color-coded by how close it was — so even a miss tells you something.</p>
+    <div class="swatches">
+      <div class="swatch"><span class="dot" style="background:#FF3B30"></span>Red box (win)</div>
+      <div class="swatch"><span class="dot" style="background:#FFB347"></span>1 square away</div>
+      <div class="swatch"><span class="dot" style="background:#F2A93B"></span>2 squares away</div>
+      <div class="swatch"><span class="dot" style="background:#6B8CAE"></span>Not close</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Live leaderboard</h2>
+    <p>
+      Every grid level has its own leaderboard, ranked by average tries-to-hit —
+      not luck on a single try. Pick a handle, keep playing, and watch your rank climb
+      in real time as others play too.
+    </p>
+  </section>
+
+  <footer>
+    Questions or feedback? <a href="mailto:malliksanjibk@gmail.com">Get in touch</a><br><br>
+    &copy; 2026 ESPChecker · <a href="privacy.html">Privacy Policy</a>
+  </footer>
+</div>
+</body>
+</html>

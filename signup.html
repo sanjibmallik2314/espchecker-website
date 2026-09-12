@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the ESPChecker Beta</title>
+<link rel="icon" href="./assets/favicon.png">
+<style>
+  :root{
+    --bg:#0A0D12; --panel:#12161F; --edge:#1D2330;
+    --cyan:#4FD6FF; --red:#FF3B30; --text:#E9ECF2; --dim:#7A8494;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: radial-gradient(ellipse at top, #10141C 0%, var(--bg) 60%);
+    color:var(--text);
+  }
+  .wrap{ max-width:480px; margin:0 auto; padding:56px 24px 80px; }
+  a.back{ display:inline-block; margin-bottom:28px; color:var(--dim); text-decoration:none; font-size:14px; }
+  .icon{ width:72px; height:72px; border-radius:16px; margin-bottom:16px; }
+  h1{ font-size:26px; font-weight:800; margin:0 0 10px; }
+  p.sub{ color:var(--dim); font-size:15px; line-height:1.6; margin-bottom:32px; }
+
+  label{ display:block; font:700 11px ui-monospace, monospace; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); margin-bottom:8px; }
+  input, select{
+    width:100%; background:var(--panel); border:1px solid var(--edge); border-radius:10px;
+    padding:13px 14px; color:var(--text); font-size:15px; margin-bottom:20px;
+  }
+  select{ appearance:none; -webkit-appearance:none; }
+
+  button{
+    width:100%; padding:14px; border:none; border-radius:10px; background:var(--cyan);
+    color:#04121A; font-weight:800; font-size:15px; cursor:pointer;
+  }
+  button:disabled{ opacity:0.5; }
+
+  .status{ margin-top:16px; text-align:center; font-size:14px; min-height:20px; }
+  .status.ok{ color:#57C785; }
+  .status.err{ color:var(--red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to ESPChecker</a>
+  <img class="icon" src="./assets/icon.png" alt="ESPChecker icon">
+  <h1>Join the Beta</h1>
+  <p class="sub">
+    ESPChecker is currently in private TestFlight testing. Leave your email and
+    device details below and we'll send you an invite as soon as a spot opens up.
+  </p>
+
+  <form id="signupForm">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+    <label for="os">Your phone's OS</label>
+    <select id="os" name="os" required>
+      <option value="" disabled selected>Select one</option>
+      <option value="iOS 26">iOS 26</option>
+      <option value="iOS 18">iOS 18</option>
+      <option value="iOS 17">iOS 17 or earlier</option>
+      <option value="Android">Android</option>
+      <option value="Other">Other / Not sure</option>
+    </select>
+
+    <button type="submit" id="submitBtn">Request an invite</button>
+    <div class="status" id="status"></div>
+  </form>
+</div>
+
+<script>
+  // Paste your deployed Apps Script /exec URL here (see SignupCode.gs).
+  const SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+  const form = document.getElementById('signupForm');
+  const statusEl = document.getElementById('status');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    statusEl.textContent = 'Submitting…';
+    statusEl.className = 'status';
+
+    const email = document.getElementById('email').value.trim();
+    const os = document.getElementById('os').value;
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' }, // avoids a CORS preflight to Apps Script
+        body: JSON.stringify({ email, os, timestamp: Date.now() }),
+      });
+      statusEl.textContent = "You're on the list — we'll email you an invite soon!";
+      statusEl.className = 'status ok';
+      form.reset();
+    } catch (err) {
+      statusEl.textContent = 'Something went wrong. Please try again.';
+      statusEl.className = 'status err';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
